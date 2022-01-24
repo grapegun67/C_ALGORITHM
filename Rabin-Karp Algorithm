@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h> 
+#include <math.h>
+
+#define	TMP_LEN 3
+#define	STAND_LEN 7
+
+int main()
+{
+	int rc, ii, len, answer = -1, standSum = 0, tmpSum = 0;
+	char tmp[TMP_LEN] = { 0, };
+	char stand[STAND_LEN] = "abcdef";
+
+	printf("문자를 입력하세요: ");
+	rc = scanf("%s", tmp);
+
+	len = strlen(tmp);
+
+	/* 첫번째 경우는 미리 구해놓기 */
+	for (ii = 0; ii < len; ii++)
+	{
+		standSum += stand[ii] * (int)pow(2, (double)len-1-ii);
+		tmpSum += tmp[ii] * (int)pow(2, (double)len-1-ii);
+	}
+
+	/* 값 변환은 반복문 마지막에 진행한다 */
+	for (ii = 1; ii < STAND_LEN - len; ii++)
+	{
+		if (standSum == tmpSum)
+		{
+			answer = ii - 1;
+			break;
+		}
+		else
+			standSum = 2 * (standSum - (stand[ii - 1] * (int)pow(2, (double)len-1))) + stand[ii + 1];
+	}
+
+	if (answer == -1)
+		printf("NO ANSWER!!\n");
+	else
+		printf("standSum:[%s]\nstr:[%.*s], indx:[%d]\n", stand, len, &stand[answer], len);
+
+	return (0);
+}
