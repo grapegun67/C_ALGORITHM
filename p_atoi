@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h> 
+#include <math.h>
+
+void p_atoi(char str[], int* val, int* rc)
+{
+	int ii, n = 0, sum = 0;
+
+	for (ii = strlen(str) - 1; ii > 0; ii--)
+	{
+		if (str[ii] < '0' || str[ii] > '9')
+		{
+			*rc = -1;
+			return;
+		}
+		sum += (str[ii] - '0') * (int)pow(10, n++);
+	}
+
+	if (str[ii] == '-')
+		sum *= -1;
+	else
+		sum += (str[ii] - '0') * (int)pow(10, n++);
+
+	*val = sum;
+	*rc = 1;
+
+	return;
+}
+
+int main()
+{
+	int val = 0, rc = 0;
+	char str[20];
+
+	printf("수를 입력하세요\n");
+	rc = scanf("%s", str);
+
+	p_atoi(str, &val, &rc);
+
+	if (rc == -1)
+		printf("INPUT ERROR!\n");
+	else
+		printf("TRANSITION: [%d]\n", val);
+
+	return (0);
+}
