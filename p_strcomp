@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h> 
+
+#define MAX_IDX 20
+
+int p_strcomp(char str1[], char str2[])
+{
+	while (*str1 == *str2)
+	{
+		if (*str1 == '\0' && *str2 == '\0')
+			return (0);
+
+		str1++;
+		str2++;
+	}
+	
+	return (*str1 - *str2);
+}
+
+int main()
+{
+	int rc;
+	char str1[MAX_IDX] = "tbcd";
+	char str2[MAX_IDX] = "tbca";
+	
+	printf("First: [%p] [%p]\n", str1, str2);
+	rc = p_strcomp(str1, str2);
+	printf("Second: [%p] [%p]\n", str1, str2);
+
+	printf("rc = [%d]\n", rc);
+
+	return (0);
+}
