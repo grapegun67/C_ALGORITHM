@@ -31,13 +31,46 @@ void p_free(ListNode* node)
 	free(node->next);
 }
 
+void p_lastInsert(ListNode* head, int value)
+{
+	ListNode *head_tmp = head;
+	ListNode *node_tmp = malloc(sizeof(ListNode));
+	if (node_tmp == NULL)
+	{
+		printf("p_lastInsert() - malloc() ERROR\n");
+		return;
+	}
+
+	node_tmp->value = value;
+	node_tmp->next = NULL;
+
+	while (head_tmp->next != NULL)
+		head_tmp = head_tmp->next;
+
+	head_tmp->next = node_tmp;
+}
+
+void p_printNode(ListNode* head)
+{
+	ListNode* head_tmp = head;
+
+	while (head_tmp->next != NULL)
+	{
+		head_tmp = head_tmp->next;
+		printf("[%d] ", head_tmp->value);
+	}
+}
+
 int main()
 {
 	ListNode head;
 	head.value = 0;
 	head.next = NULL;
 
-	p_firstInsert(&head, 5);
+	p_firstInsert(&head, 1);
+	p_lastInsert(&head, 3);
+	p_firstInsert(&head, 2);
+	p_printNode(&head);
 
 	p_free(&head);
 	return (0);
