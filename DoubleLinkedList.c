@@ -149,7 +149,7 @@ int main()
 
 	while (1)
 	{
-		printf("숫자입력하세요(-1은 처음노드 삭제): ");
+		printf("숫자입력하세요(-1은 ): ");
 		rc = scanf("%d", &num);
 
 		if (num == -1)
