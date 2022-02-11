@@ -149,7 +149,7 @@ int main()
 
 	while (1)
 	{
-		printf("숫자입력하세요(-1은 ): ");
+		printf("숫자입력하세요(-1은 역순으로 복사): ");
 		rc = scanf("%d", &num);
 
 		if (num == -1)
