@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct node
+{
+	int data;
+	struct node* left;
+	struct node* right;
+}BstNode;
+
+void bst_init(BstNode* tmp)
+{
+	memset(tmp, 0, sizeof(BstNode));
+	return;
+}
+
+void bst_push(BstNode* root, int tmp)
+{
+	BstNode* tmp_ptr = root;
+
+	/* root data input */
+	if (root->data == 0)
+	{
+		root->data = tmp;
+		return;
+	}
+
+	while (1)
+	{
+		/* 왼쪽 자식인 경우 */
+		if (tmp < tmp_ptr->data)
+		{
+			if (tmp_ptr->left == NULL)
+			{
+				tmp_ptr->left = (BstNode*)malloc(sizeof(BstNode));
+				bst_init(tmp_ptr->left);
+				tmp_ptr->left->data = tmp;
+				break;
+			}
+
+			else
+				tmp_ptr = tmp_ptr->left;
+		}
+
+		/* 오른쪽 자식인 경우 */
+		else
+		{
+			if (tmp_ptr->right == NULL)
+			{
+				tmp_ptr->right = (BstNode*)malloc(sizeof(BstNode));
+				bst_init(tmp_ptr->right);
+				tmp_ptr->right->data = tmp;
+				break;
+			}
+
+			else
+				tmp_ptr = tmp_ptr->right;
+		}
+
+	}
+}
+
+void bst_print(BstNode* node)
+{
+	if (node == NULL)
+		return;
+
+	/* 중위순회로 순차 출력 */
+	bst_print(node->left);
+	printf("[%d] ", node->data);
+	bst_print(node->right);
+}
+
+int main()
+{
+	int num;
+	BstNode bst;
+
+	printf("START\n");
+	bst_init(&bst);
+
+	while (1)
+	{
+		printf("\n\n숫자를 입력하세요\n");
+		scanf("%d", &num);
+		bst_push(&bst, num);
+
+		printf("print => ");
+		bst_print(&bst);
+	}
+
+	printf("\nEND");
+
+	return (0);
+}
